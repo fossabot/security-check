@@ -1,6 +1,6 @@
 # [Security Check](https://github.com/dbtedman/security-check)
 
-_Content to come._
+Platform for automated security testing build for developers.
 
 -   [Where do I start?](#where-do-i-start)
 -   [Want to lean more?](#want-to-lean-more)

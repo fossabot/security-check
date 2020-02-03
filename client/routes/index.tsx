@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Route, Router, Switch } from "react-router-dom";
-import { createBrowserHistory } from "History";
+import { createBrowserHistory } from "history";
 
 import NotFoundComponent from "../components/NotFound/NotFoundComponent";
 

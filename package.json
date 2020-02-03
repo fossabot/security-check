@@ -7,19 +7,42 @@
   "scripts": {
     "_prettier": "prettier './{**/,/}*.{js,jsx,md,yml,yaml,json}'",
     "audit": "snyk test --dev --file=package.json",
+    "build:production": "webpack --mode production",
     "format": "yarn _prettier -- --write",
     "lint": "yarn _prettier -- --check",
-    "test": "jest --coverage"
+    "test": "jest --coverage",
+    "watch": "webpack-dev-server"
   },
   "devDependencies": {
     "@types/jest": "25.1.1",
     "@types/node": "13.7.0",
+    "@types/react": "16.9.19",
+    "@types/react-dom": "16.9.5",
+    "@types/react-redux": "7.1.7",
+    "@types/react-router": "5.1.4",
+    "@types/react-router-dom": "5.1.3",
+    "@types/react-router-redux": "5.0.18",
+    "@types/styled-components": "4.4.2",
+    "@types/webpack": "4.41.4",
     "codecov": "3.6.4",
+    "html-webpack-plugin": "3.2.0",
     "husky": "4.2.1",
     "jest": "25.1.0",
     "prettier": "1.19.1",
+    "react": "16.12.0",
+    "react-dom": "16.12.0",
+    "react-redux": "7.1.3",
+    "react-router": "5.1.2",
+    "react-router-dom": "5.1.2",
+    "react-router-redux": "4.0.8",
     "snyk": "1.290.1",
+    "styled-components": "5.0.0",
     "ts-jest": "25.1.0",
-    "typescript": "3.7.5"
+    "ts-loader": "6.2.1",
+    "ts-node": "8.6.2",
+    "typescript": "3.7.5",
+    "webpack": "4.41.5",
+    "webpack-cli": "3.3.10",
+    "webpack-dev-server": "3.10.2"
   }
 }

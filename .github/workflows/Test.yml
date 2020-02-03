@@ -17,6 +17,7 @@ on:
 
 env:
   CI: true
+  CODECOV_TOKEN: "${{ secrets.CODECOV_TOKEN }}"
 
 jobs:
   test:
@@ -35,4 +36,4 @@ jobs:
         run: "yarn install --no-audit"
 
       - name: "Verify"
-        run: "yarn lint && yarn test"
+        run: 'yarn lint && yarn test && yarn codecov --token="${CODECOV_TOKEN}"'

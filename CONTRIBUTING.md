@@ -3,6 +3,7 @@
 -   [Audit](#audit)
 -   [Format and Lint](#format-and-lint)
 -   [Pre-commit Hook](#pre-commit-hook)
+-   [Test](#test)
 
 ## Audit
 

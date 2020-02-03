@@ -1,6 +1,7 @@
 # [Security Check](https://github.com/dbtedman/security-check)
 
 [![Actions Status](https://github.com/dbtedman/security-check/workflows/Test/badge.svg)](https://github.com/dbtedman/security-check/actions)
+[![CodeCov](https://codecov.io/gh/dbtedman/security-check/branch/master/graph/badge.svg)](https://codecov.io/gh/dbtedman/security-check)
 
 Platform for automated security testing build for developers.
 

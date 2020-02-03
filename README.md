@@ -3,7 +3,7 @@
 [![Actions Status](https://github.com/dbtedman/security-check/workflows/Test/badge.svg)](https://github.com/dbtedman/security-check/actions)
 [![CodeCov](https://codecov.io/gh/dbtedman/security-check/branch/master/graph/badge.svg)](https://codecov.io/gh/dbtedman/security-check)
 
-Platform for automated security testing build for developers.
+Platform for automated security testing built for developers.
 
 -   [Where do I start?](#where-do-i-start)
 -   [Want to lean more?](#want-to-lean-more)

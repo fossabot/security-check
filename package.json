@@ -1,0 +1,16 @@
+{
+  "name": "security-check",
+  "private": true,
+  "repository": "git@github.com:dbtedman/security-check.git",
+  "author": "Daniel Tedman <dbtedman@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "_prettier": "prettier './{**/,/}*.{js,jsx,md,yml,yaml,json}'",
+    "format": "yarn _prettier -- --write",
+    "lint": "yarn _prettier -- --check"
+  },
+  "devDependencies": {
+    "husky": "4.2.1",
+    "prettier": "1.19.1"
+  }
+}

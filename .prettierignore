@@ -1,0 +1,11 @@
+#-------------------------------------------------------------------------------
+#
+# Prettier Ignores, https://prettier.io/docs/en/ignore.html
+#
+#-------------------------------------------------------------------------------
+
+# Library code
+/node_modules/
+
+# Generated code
+/yarn.lock

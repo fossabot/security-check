@@ -1,0 +1,38 @@
+#-------------------------------------------------------------------------------
+#
+# GitHub Actions Test Configuration
+#
+#-------------------------------------------------------------------------------
+---
+name: "Test"
+
+on:
+  schedule:
+    # 11pm UTC (8am Australia/Brisbane)
+    - cron: "0 22 * * *"
+  pull_request: {}
+  push:
+    branches:
+      - "master"
+
+env:
+  CI: true
+
+jobs:
+  test:
+    runs-on: "ubuntu-latest"
+
+    steps:
+      - name: "Check out code into the Go module directory"
+        uses: "actions/checkout@v1"
+
+      - name: "Use Node.js 12.x"
+        uses: "actions/setup-node@v1"
+        with:
+          node-version: "12.14.x"
+
+      - name: "Install"
+        run: "yarn install --no-audit"
+
+      - name: "Verify"
+        run: "yarn lint && yarn test"

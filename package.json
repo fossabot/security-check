@@ -6,11 +6,19 @@
   "license": "MIT",
   "scripts": {
     "_prettier": "prettier './{**/,/}*.{js,jsx,md,yml,yaml,json}'",
+    "audit": "snyk test --dev --file=package.json",
     "format": "yarn _prettier -- --write",
-    "lint": "yarn _prettier -- --check"
+    "lint": "yarn _prettier -- --check",
+    "test": "jest --coverage"
   },
   "devDependencies": {
+    "@types/jest": "25.1.1",
+    "@types/node": "13.7.0",
     "husky": "4.2.1",
-    "prettier": "1.19.1"
+    "jest": "25.1.0",
+    "prettier": "1.19.1",
+    "snyk": "1.290.1",
+    "ts-jest": "25.1.0",
+    "typescript": "3.7.5"
   }
 }

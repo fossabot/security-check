@@ -9,3 +9,6 @@
 
 # Yarn dependencies
 /node_modules/
+
+# Test coverage
+/coverage/

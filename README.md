@@ -1,5 +1,7 @@
 # [Security Check](https://github.com/dbtedman/security-check)
 
+[![Actions Status](https://github.com/dbtedman/security-check/workflows/Test/badge.svg)](https://github.com/dbtedman/security-check/actions)
+
 Platform for automated security testing build for developers.
 
 -   [Where do I start?](#where-do-i-start)

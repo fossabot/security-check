@@ -2,6 +2,8 @@
 
 [![Actions Status](https://github.com/dbtedman/security-check/workflows/Test/badge.svg)](https://github.com/dbtedman/security-check/actions)
 [![CodeCov](https://codecov.io/gh/dbtedman/security-check/branch/master/graph/badge.svg)](https://codecov.io/gh/dbtedman/security-check)
+[![Known Vulnerabilities](https://snyk.io/test/github/dbtedman/security-check/badge.svg?style=flat-square)](https://snyk.io/test/github/dbtedman/security-check)
+[![Maintainability](https://api.codeclimate.com/v1/badges/243954e728e1e087b22b/maintainability)](https://codeclimate.com/github/dbtedman/security-check/maintainability)
 
 Platform for automated security testing built for developers.
 
@@ -10,7 +12,13 @@ Platform for automated security testing built for developers.
 
 ## Where do I start?
 
-_Content to come._
+```bash
+yarn install
+```
+
+```bash
+yarn watch
+```
 
 ## Want to lean more?
 

@@ -1,6 +1,7 @@
 # [Security Check](./README.md) / Architecture
 
 -   [Components](#components)
+-   [Test Execution](#test-execution)
 
 ## Components
 
@@ -19,3 +20,7 @@
 ### `/core`
 
 [GoLang](https://golang.org/) application core that is accessed by CLI and API components.
+
+## Test Execution
+
+

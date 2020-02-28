@@ -31,8 +31,22 @@ On commit, auto formatting is run by [Husky](https://github.com/typicode/husky),
 
 ## Test
 
+### Client
+
 Tests implemented with [Jest](https://jestjs.io), configured in `jest.config.js`, based on test files matching `./client/**/*.spec.ts`.
 
 ```bash
 yarn test
 ```
+
+### API, CLI, Core
+
+```bash
+go test ./{api,cli,core}/... -cover
+```
+
+## Dependencies
+
+### API, CLI, Core
+
+[Go Modules](https://github.com/golang/go/wiki/Modules) has been chosen to manage Go dependencies for this repository. Vendoring is used to install these modules into `./vendor` directory instead of into `$GOPATH` which helps to isolate this project from other Go projects being developed on the same workstation. Running `go mod vendor` to install dependencies and then providing `-mod=vendor` argument to the `go build` command enables this functionality.

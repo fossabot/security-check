@@ -22,5 +22,3 @@
 [GoLang](https://golang.org/) application core that is accessed by CLI and API components.
 
 ## Test Execution
-
-

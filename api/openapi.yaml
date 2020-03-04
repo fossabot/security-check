@@ -11,6 +11,10 @@ info:
   version: "0.1.0"
   description: "Platform for automated security testing built for developers."
 
+externalDocs:
+  description: "Source Code"
+  url: "https://github.com/dbtedman/security-check"
+
 servers:
   - description: "Development"
     url: "http://localhost/0.1.0"
@@ -170,6 +174,12 @@ paths:
         - "Runs"
       description: "List Runs"
       parameters:
+        - name: "user"
+          schema:
+            type: "integer"
+          in: "query"
+          required: false
+          description: "Refine results by user associated with them."
         - name: "limit"
           schema:
             type: "integer"
@@ -219,6 +229,27 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
 
+    post:
+      tags:
+        - "Runs"
+      description: "Initiate Run"
+      responses:
+        "201":
+          description: "Created"
+          headers:
+            Location:
+              description: "URL representing initiated run."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Run"
+        "400":
+          description: "Bad Request"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
 components:
   schemas:
     Error:
@@ -258,20 +289,20 @@ components:
           type: "string"
 
 tags:
-  - name: "System Status"
-    description: |
-      API endpoints used to monitor status of the system.
-
   - name: "Checks"
     description: |
       A check represents an activity the system can perform to validate the
       security of a system.
+
+  - name: "Suites"
+    description: |
+      A suite is a collection of checks that are related.
 
   - name: "Runs"
     description: |
       A run represents a collection of activities performed at a moment in time
       for a specific system.
 
-  - name: "Suites"
+  - name: "System Status"
     description: |
-      A suite is a collection of checks that are related.
+      API endpoints used to monitor status of the system.

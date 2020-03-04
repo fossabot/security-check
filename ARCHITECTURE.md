@@ -7,7 +7,7 @@
 
 ### `/api`
 
-[GoLang](https://golang.org/) web API used by the client component.
+[GoLang](https://golang.org/) web API used by the client component. See [`api/openapi.yaml`](./api/openapi.yaml) for API specification.
 
 ### `/cli`
 

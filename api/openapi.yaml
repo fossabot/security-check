@@ -1,0 +1,277 @@
+#-------------------------------------------------------------------------------
+#
+# API Specification, https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.3.md
+#
+#-------------------------------------------------------------------------------
+---
+openapi: "3.0.3"
+
+info:
+  title: "Security Check API"
+  version: "0.1.0"
+  description: "Platform for automated security testing built for developers."
+
+servers:
+  - description: "Development"
+    url: "http://localhost/0.1.0"
+
+paths:
+  /metrics:
+    get:
+      tags:
+        - "System Status"
+      description: "Export Metrics"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            # https://github.com/prometheus/docs/blob/master/content/docs/instrumenting/exposition_formats.md
+            text/plain:
+              example: |
+                # HELP http_requests_total The total number of HTTP requests.
+                # TYPE http_requests_total counter
+                http_requests_total{method="post",code="200"} 1027 1395066363000
+                http_requests_total{method="post",code="400"}    3 1395066363000
+              schema:
+                type: "string"
+
+  /health:
+    get:
+      tags:
+        - "System Status"
+      description: "Check System Health"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                type: "object"
+        "503":
+          description: "Service Unavailable"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /suites:
+    get:
+      tags:
+        - "Suites"
+      description: "List Suites"
+      parameters:
+        - name: "limit"
+          schema:
+            type: "integer"
+          in: "query"
+          required: false
+          description: "Limit the number of results returned, defaults to 20."
+        - name: "offset"
+          schema:
+            type: "integer"
+          in: "query"
+          required: false
+          description: "Start from this result, instead of the default 0."
+        - name: "query"
+          schema:
+            type: "string"
+          in: "query"
+          required: false
+          description: "Limit results based on this query string."
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                type: "object"
+                properties:
+                  suites:
+                    type: "array"
+                    items:
+                      $ref: "#/components/schemas/Suite"
+        "400":
+          description: "Bad Request"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "401":
+          description: "Unauthorized"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: "Forbidden"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /checks:
+    get:
+      tags:
+        - "Checks"
+      description: "List Checks"
+      parameters:
+        - name: "limit"
+          schema:
+            type: "integer"
+          in: "query"
+          required: false
+          description: "Limit the number of results returned, defaults to 20."
+        - name: "offset"
+          schema:
+            type: "integer"
+          in: "query"
+          required: false
+          description: "Start from this result, instead of the default 0."
+        - name: "query"
+          schema:
+            type: "string"
+          in: "query"
+          required: false
+          description: "Limit results based on this query string."
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                type: "object"
+                properties:
+                  checks:
+                    type: "array"
+                    items:
+                      $ref: "#/components/schemas/Check"
+        "400":
+          description: "Bad Request"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "401":
+          description: "Unauthorized"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: "Forbidden"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /runs:
+    get:
+      tags:
+        - "Runs"
+      description: "List Runs"
+      parameters:
+        - name: "limit"
+          schema:
+            type: "integer"
+          in: "query"
+          required: false
+          description: "Limit the number of results returned, defaults to 20."
+        - name: "offset"
+          schema:
+            type: "integer"
+          in: "query"
+          required: false
+          description: "Start from this result, instead of the default 0."
+        - name: "query"
+          schema:
+            type: "string"
+          in: "query"
+          required: false
+          description: "Limit results based on this query string."
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                type: "object"
+                properties:
+                  runs:
+                    type: "array"
+                    items:
+                      $ref: "#/components/schemas/Run"
+        "400":
+          description: "Bad Request"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "401":
+          description: "Unauthorized"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: "Forbidden"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+components:
+  schemas:
+    Error:
+      type: "object"
+      properties:
+        cause:
+          type: "string"
+
+    Suite:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+        name:
+          type: "string"
+
+    Check:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+        name:
+          type: "string"
+        description:
+          type: "string"
+
+    Run:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+        start:
+          type: "string"
+        end:
+          type: "string"
+        status:
+          type: "string"
+
+tags:
+  - name: "System Status"
+    description: |
+      API endpoints used to monitor status of the system.
+
+  - name: "Checks"
+    description: |
+      A check represents an activity the system can perform to validate the
+      security of a system.
+
+  - name: "Runs"
+    description: |
+      A run represents a collection of activities performed at a moment in time
+      for a specific system.
+
+  - name: "Suites"
+    description: |
+      A suite is a collection of checks that are related.

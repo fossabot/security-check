@@ -4,6 +4,7 @@
 -   [Format and Lint](#format-and-lint)
 -   [Pre-commit Hook](#pre-commit-hook)
 -   [Test](#test)
+-   [API Documentation](#api-documentation)
 
 ## Audit
 
@@ -50,3 +51,9 @@ go test ./{api,cli,core}/... -cover
 ### API, CLI, Core
 
 [Go Modules](https://github.com/golang/go/wiki/Modules) has been chosen to manage Go dependencies for this repository. Vendoring is used to install these modules into `./vendor` directory instead of into `$GOPATH` which helps to isolate this project from other Go projects being developed on the same workstation. Running `go mod vendor` to install dependencies and then providing `-mod=vendor` argument to the `go build` command enables this functionality.
+
+## API Documentation
+
+```bash
+yarn docs:api
+```

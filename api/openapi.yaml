@@ -12,7 +12,7 @@ info:
   description: "Platform for automated security testing built for developers."
 
 externalDocs:
-  description: "Source Code"
+  description: "Source Code + Documentation"
   url: "https://github.com/dbtedman/security-check"
 
 servers:
@@ -29,7 +29,6 @@ paths:
         "200":
           description: "OK"
           content:
-            # https://github.com/prometheus/docs/blob/master/content/docs/instrumenting/exposition_formats.md
             text/plain:
               example: |
                 # HELP http_requests_total The total number of HTTP requests.
@@ -38,6 +37,9 @@ paths:
                 http_requests_total{method="post",code="400"}    3 1395066363000
               schema:
                 type: "string"
+                externalDocs:
+                  description: "Prometheus Text Format"
+                  url: "https://github.com/prometheus/docs/blob/master/content/docs/instrumenting/exposition_formats.md"
 
   /health:
     get:

@@ -24,21 +24,3 @@ A suite is a collection of one or more checks along with configuration on how th
 ### Runs
 
 A run is a moment in time when one or more suites are executed and the results of running those suites are collated.
-
-## System Components
-
-### `/api`
-
-[GoLang](https://golang.org/) web API used by the client component. See [`api/openapi.yaml`](./api/openapi.yaml) for API specification.
-
-### `/cli`
-
-[GoLang](https://golang.org/) command line interface used to interact with the application core.
-
-### `/client`
-
-[ReactJS](https://reactjs.org/) and [TypeScript](https://www.typescriptlang.org/) single page application witch interacts with API component.
-
-### `/core`
-
-[GoLang](https://golang.org/) application core that is accessed by CLI and API components.

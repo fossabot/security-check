@@ -36,4 +36,4 @@ jobs:
         run: "yarn install --no-audit"
 
       - name: "Verify"
-        run: 'yarn lint && yarn test && yarn codecov --token="${CODECOV_TOKEN}"'
+        run: 'echo "Not yet implemented!"'

@@ -1,5 +1,7 @@
 # [Security Check](https://github.com/dbtedman/security-check)
 
+> WARNING: Pre-release software!
+
 [![Actions Status](https://github.com/dbtedman/security-check/workflows/Test/badge.svg)](https://github.com/dbtedman/security-check/actions)
 [![CodeCov](https://codecov.io/gh/dbtedman/security-check/branch/master/graph/badge.svg)](https://codecov.io/gh/dbtedman/security-check)
 [![Known Vulnerabilities](https://snyk.io/test/github/dbtedman/security-check/badge.svg?style=flat-square)](https://snyk.io/test/github/dbtedman/security-check)
@@ -12,12 +14,10 @@ Platform for automated security testing built for developers.
 
 ## Where do I start?
 
-```bash
-yarn install
-```
+Install necessary dependencies, build and run program:
 
 ```bash
-yarn watch
+go mod vendor && go build -mod=vendor -o ./security-check && ./security-check
 ```
 
 ## Want to lean more?

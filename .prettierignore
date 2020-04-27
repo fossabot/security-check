@@ -6,6 +6,7 @@
 
 # Library code
 /node_modules/
+/vendor/
 
 # Generated code
 /yarn.lock

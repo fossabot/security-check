@@ -7,13 +7,11 @@
   "license": "MIT",
   "scripts": {
     "_prettier": "prettier './{**/,/}*.{js,jsx,md,yml,yaml,json}'",
-    "audit": "snyk test --dev --file=package.json",
     "format": "yarn _prettier --write",
     "lint": "yarn _prettier --check"
   },
   "devDependencies": {
-    "husky": "4.2.3",
-    "prettier": "1.19.1",
-    "snyk": "1.297.2"
+    "husky": "4.2.5",
+    "prettier": "2.0.5"
   }
 }

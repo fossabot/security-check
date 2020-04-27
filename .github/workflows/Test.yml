@@ -30,24 +30,24 @@ jobs:
       - name: "Use Node.js 12.x"
         uses: "actions/setup-node@v1"
         with:
-          node-version: "12.14.x"
+          node-version: "12.x"
 
-      - name: "Set up Go 1.13"
+      - name: "Set up Go 1.14"
         uses: "actions/setup-go@v1"
         with:
-          go-version: 1.13
+          go-version: "1.14"
         id: "go"
 
       - name: "Install"
         run: "yarn install --no-audit && go mod vendor"
 
       - name: "Lint"
-        run: "yarn lint && gofmt -l"
+        run: "yarn lint && gofmt -l ./go && gofmt -l ./main.go"
 
       - name: "Test"
-        run: "go test ./lib/... -cover -coverprofile=coverage.txt"
+        run: "go test ./go/... -cover -coverprofile=coverage.txt"
 
       - name: "Publish Coverage"
         run: "bash <(curl -s https://codecov.io/bash)"
         env:
-          CODECOV_TOKEN: ${{ secrets. CODECOV_TOKEN }}
+          CODECOV_TOKEN: "${{ secrets. CODECOV_TOKEN }}"

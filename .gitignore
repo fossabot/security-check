@@ -12,7 +12,7 @@
 /*.log
 
 # Test coverage
-/coverage/
+/coverage.txt
 
 # Build artefacts
 /security-check

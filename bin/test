@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+#-------------------------------------------------------------------------------
+#
+# Test
+#
+#-------------------------------------------------------------------------------
+
+DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
+DIR_ROOT="${DIR/\/bin/}"
+DIR_CURRENT="$(pwd)"
+
+# Include shared function definitions
+cd "${DIR}" || exit
+source "./_functions"
+
+cd "${DIR_ROOT}" || exit
+
+ensure go test ./go/... -cover -coverprofile=coverage.txt
+
+cd "${DIR_CURRENT}" || exit

@@ -17,7 +17,7 @@ Platform for automated security testing built for developers.
 Install necessary dependencies, build and run program:
 
 ```bash
-go mod vendor && go build -mod=vendor -o ./security-check && ./security-check
+./bin/build && ./security-check
 ```
 
 ## Want to lean more?

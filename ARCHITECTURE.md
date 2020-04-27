@@ -1,7 +1,6 @@
 # [Security Check](./README.md) / Architecture
 
 -   [Conceptual Components](#conceptual-components)
--   [System Components](#system-components)
 
 ## Conceptual Components
 

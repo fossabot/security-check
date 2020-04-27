@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+#-------------------------------------------------------------------------------
+#
+# Shared Function Definitions
+#
+#-------------------------------------------------------------------------------
+
+# $1 Message to print.
+function info_message() {
+    printf "\e[34mInfo:\e[39m %s\n" "${1}"
+}
+
+# $1 Message to print.
+function success_message() {
+    printf "\e[32mSuccess:\e[39m %s\n" "${1}"
+}
+
+# $1 Message to print.
+function failure_message() {
+    printf "\e[31mError:\e[39m %s\n" "${1}"
+}
+
+# Ensure a command completes successfully, otherwise exit.
+# $@ Command to execute.
+function ensure() {
+    "$@"
+    local status=$?
+    if [[ ${status} -ne 0 ]]; then
+        exit ${status}
+    fi
+}

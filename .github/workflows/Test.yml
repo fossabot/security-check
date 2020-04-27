@@ -42,10 +42,10 @@ jobs:
         run: "yarn install --no-audit && go mod vendor"
 
       - name: "Lint"
-        run: "yarn lint && gofmt -l ./go && gofmt -l ./main.go"
+        run: "./bin/lint"
 
       - name: "Test"
-        run: "go test ./go/... -cover -coverprofile=coverage.txt"
+        run: "./bin/test"
 
       - name: "Publish Coverage"
         run: "bash <(curl -s https://codecov.io/bash)"

@@ -32,8 +32,22 @@ jobs:
         with:
           node-version: "12.14.x"
 
-      - name: "Install"
-        run: "yarn install --no-audit"
+      - name: "Set up Go 1.13"
+        uses: "actions/setup-go@v1"
+        with:
+          go-version: 1.13
+        id: "go"
 
-      - name: "Verify"
-        run: 'echo "Not yet implemented!"'
+      - name: "Install"
+        run: "yarn install --no-audit && go mod vendor"
+
+      - name: "Lint"
+        run: "yarn lint && gofmt -l"
+
+      - name: "Test"
+        run: "go test ./lib/... -cover -coverprofile=coverage.txt"
+
+      - name: "Publish Coverage"
+        run: "bash <(curl -s https://codecov.io/bash)"
+        env:
+          CODECOV_TOKEN: ${{ secrets. CODECOV_TOKEN }}

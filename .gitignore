@@ -4,15 +4,18 @@
 #
 #-------------------------------------------------------------------------------
 
-# Keep this file even if directory has been ignored
-!.keep
-
-# Yarn dependencies
+# Don't include dependencies
 /node_modules/
+/vendor/
+
+# Don't include error logs
 /*.log
 
-# Test coverage
+# Don't include test coverage
 /coverage.txt
 
-# Build artefacts
+# Don't include build artefacts
 /security-check
+
+# Include file even if directory has been ignored
+!.keep

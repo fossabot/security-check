@@ -15,11 +15,3 @@ name: "Example Search Reflective XSS"
 request_url: "https://example.com/search?q={value}"
 response_reflection_selector: ".query"
 ```
-
-### Suites
-
-A suite is a collection of one or more checks along with configuration on how the checks will be executed.
-
-### Runs
-
-A run is a moment in time when one or more suites are executed and the results of running those suites are collated.

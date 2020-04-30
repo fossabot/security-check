@@ -15,6 +15,11 @@ source "./_functions"
 
 cd "${DIR_ROOT}" || exit
 
+info_message "Test : Begin"
+
+info_message "Test : Go Test"
 ensure go test ./go/... -cover -coverprofile=coverage.txt
+
+info_message "Test : End"
 
 cd "${DIR_CURRENT}" || exit

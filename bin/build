@@ -15,8 +15,14 @@ source "./_functions"
 
 cd "${DIR_ROOT}" || exit
 
+info_message "Build : Begin"
+
+info_message "Build : Go Mod Vendor"
 ensure go mod vendor
 
+info_message "Build : Go Build"
 ensure go build -mod=vendor -o ./security-check
+
+info_message "Build : End"
 
 cd "${DIR_CURRENT}" || exit

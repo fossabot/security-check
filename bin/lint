@@ -15,8 +15,14 @@ source "./_functions"
 
 cd "${DIR_ROOT}" || exit
 
+info_message "Lint : Begin"
+
+info_message "Lint : Prettier"
 ensure yarn lint
 
+info_message "Lint : Go Format"
 ensure gofmt -l ./go && gofmt -l ./main.go
+
+info_message "Lint : End"
 
 cd "${DIR_CURRENT}" || exit

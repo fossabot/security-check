@@ -13,13 +13,19 @@ const ValidRequestURL = "https://danieltedman.com?q={value}"
 func TestCanPerformCheck(t *testing.T) {
 	httpGatewayFake := http_gateway.HTTPGatewayFake{}
 	var httpGateway http_gateway.HTTPGateway = &httpGatewayFake
+
 	response := CheckReflectiveXSS(
 		CheckReflectiveXSSRequest{
 			RequestURL:    ValidRequestURL,
 			QuerySelector: ValidQuerySelector,
 			HTTPGateway:   httpGateway,
 		})
+
 	assert.Equal(t, response.Error, nil)
+	assert.Equal(t, len(response.CheckResults) > 0, true)
+	//for _, checkResult := range response.CheckResults {
+	//  assert.Equal(t, checkResult.Successful, true)
+	//}
 }
 
 func TestErrorsWithMissingRequestURL(t *testing.T) {
@@ -90,8 +96,8 @@ func TestGenerateTestURLs(t *testing.T) {
 	assert.Equal(t, len(generatedURLs) > 0, true)
 
 	for _, generatedURL := range generatedURLs {
-		assert.Equal(t, url.IsValid(generatedURL), true)
-		assert.Equal(t, generatedURL != ValidRequestURL, true)
+		assert.Equal(t, url.IsValid(generatedURL.RequestURL), true)
+		assert.Equal(t, generatedURL.RequestURL != ValidRequestURL, true)
 	}
 }
 
@@ -102,4 +108,37 @@ func TestErrorsWhenHTTPGatewayNotDefined(t *testing.T) {
 			QuerySelector: ValidQuerySelector,
 		})
 	assert.Error(t, response.Error, InvalidHTTPGateway)
+}
+
+func TestLocateReflectedContentThatExists(t *testing.T) {
+	assert.Equal(t, LocateReflectedContent(
+		".result",
+		"<script>window.alert('Hack!')</script>",
+		`
+      <html>
+      <body>
+        <div class="result">
+          <script>window.alert('Hack!')</script>
+        </div>
+      </body>
+      </html>
+    `,
+	), true,
+	)
+}
+
+func TestLocateReflectedContentThatDoesNotExists(t *testing.T) {
+	assert.Equal(t, LocateReflectedContent(
+		".result",
+		"<script>window.alert('Hack!')</script>",
+		`
+      <html>
+      <body>
+        <div class="result">
+        </div>
+      </body>
+      </html>
+    `,
+	), false,
+	)
 }

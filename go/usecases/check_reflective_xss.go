@@ -2,11 +2,13 @@ package usecases
 
 import (
 	"errors"
+	"github.com/PuerkitoBio/goquery"
 	"github.com/dbtedman/security-check/go/entities/checkresult"
 	"github.com/dbtedman/security-check/go/entities/queryselector"
 	"github.com/dbtedman/security-check/go/entities/url"
 	"github.com/dbtedman/security-check/go/gateways/http_gateway"
 	"regexp"
+	"strings"
 )
 
 const InvalidHTTPGateway = "InvalidHTTPGateway"
@@ -22,6 +24,11 @@ type CheckReflectiveXSSRequest struct {
 type CheckReflectiveXSSResponse struct {
 	CheckResults []checkresult.CheckResult
 	Error        error
+}
+
+type GeneratedTestURL struct {
+	RequestURL    string
+	ReplacedValue string
 }
 
 // CheckReflectiveXSS populates malicious data into a specific position in in
@@ -50,24 +57,65 @@ func CheckReflectiveXSS(request CheckReflectiveXSSRequest) CheckReflectiveXSSRes
 		return response
 	}
 
-	for _, testURL := range GenerateTestURLs(request.RequestURL) {
-		request.HTTPGateway.Get(testURL)
-		// TODO: Add status to the CheckResult here.
-		checkResult := checkresult.CheckResult{}
+	for _, generatedTestURL := range GenerateTestURLs(request.RequestURL) {
+		getResponse := request.HTTPGateway.Get(generatedTestURL.RequestURL)
+
+		isReflected := LocateReflectedContent(
+			request.QuerySelector,
+			generatedTestURL.ReplacedValue,
+			getResponse.ResponseBody,
+		)
+
+		checkResult := checkresult.CheckResult{
+			Successful: isReflected,
+		}
+
 		response.CheckResults = append(response.CheckResults, checkResult)
 	}
 
 	return response
 }
 
-// Based on provided requestURL, replace {value} with each attack scenario.
-func GenerateTestURLs(requestURL string) []string {
-	var testURLs []string
+// Try to located reflectedContent at position identified by querySelector in
+// responseBody returned by a http request.
+func LocateReflectedContent(querySelector string, reflectedContent string, responseBody string) bool {
+	doc, queryError := goquery.NewDocumentFromReader(strings.NewReader(responseBody))
 
-	testURLs = append(testURLs, replaceValue(
-		requestURL,
-		"<script>window.alert('Hack!')</script>",
-	))
+	if queryError != nil {
+		return false
+	}
+
+	matchFound := false
+
+	doc.Find(querySelector).Each(func(_ int, selection *goquery.Selection) {
+		ret, selectionError := selection.Html()
+
+		if selectionError == nil && strings.Trim(ret, " \n") == reflectedContent {
+			matchFound = true
+		}
+	})
+
+	return matchFound
+}
+
+// Based on provided requestURL, replace {value} with each attack scenario.
+func GenerateTestURLs(requestURL string) []GeneratedTestURL {
+	var testURLs []GeneratedTestURL
+
+	for _, testValue := range []string{
+		`<script>alert("Hack!")</script>`,
+		`<script src="https://example.com/hack.js"></script>`,
+		`<iframe src="https://example.com/hack"></iframe>`,
+		`<div onload="alert('Hack!')"></div>`,
+	} {
+		testURLs = append(testURLs, GeneratedTestURL{
+			RequestURL: replaceValue(
+				requestURL,
+				testValue,
+			),
+			ReplacedValue: testValue,
+		})
+	}
 
 	return testURLs
 }
@@ -75,3 +123,9 @@ func GenerateTestURLs(requestURL string) []string {
 func replaceValue(source string, replace string) string {
 	return regexp.MustCompile("{value}").ReplaceAllString(source, replace)
 }
+
+// References:
+//    https://developer.mozilla.org/en-US/docs/Web/HTML/Element/embed
+//    https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe
+//    https://developer.mozilla.org/en-US/docs/Web/HTML/Element/object
+//    https://www.softwaretestinghelp.com/cross-site-scripting-xss-attack-test/

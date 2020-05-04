@@ -10,3 +10,12 @@ func IsValid(value string) bool {
 func IsInvalid(value string) bool {
 	return !IsValid(value)
 }
+
+func ContainsValuePlaceholder(value string) bool {
+	containsValuePlaceholder, _ := regexp.MatchString("{value}", value)
+	return containsValuePlaceholder
+}
+
+func DoesNotContainValuePlaceholder(value string) bool {
+	return !ContainsValuePlaceholder(value)
+}

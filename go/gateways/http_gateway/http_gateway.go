@@ -3,6 +3,7 @@ package http_gateway
 type HTTPGetResponse struct {
 	ResponseBody string
 	ResponseCode int
+	Error        error
 }
 
 type HTTPGateway interface {

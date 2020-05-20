@@ -6,6 +6,7 @@
 [![CodeCov](https://codecov.io/gh/dbtedman/security-check/branch/master/graph/badge.svg)](https://codecov.io/gh/dbtedman/security-check)
 [![Known Vulnerabilities](https://snyk.io/test/github/dbtedman/security-check/badge.svg?style=flat-square)](https://snyk.io/test/github/dbtedman/security-check)
 [![Maintainability](https://api.codeclimate.com/v1/badges/243954e728e1e087b22b/maintainability)](https://codeclimate.com/github/dbtedman/security-check/maintainability)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fdbtedman%2Fsecurity-check.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fdbtedman%2Fsecurity-check?ref=badge_shield)
 
 Platform for automated security testing built for developers.
 
@@ -27,3 +28,7 @@ Install necessary dependencies, build and run program:
 -   See our [Changelog](CHANGELOG.md) for details on which features, improvements, and bug fixes have been implemented.
 -   See our [License](LICENSE.md) for details on how you can use the code in this repository.
 -   See our [Security Guide](SECURITY.md) for details on how security is considered.
+
+
+## License
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fdbtedman%2Fsecurity-check.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fdbtedman%2Fsecurity-check?ref=badge_large)
